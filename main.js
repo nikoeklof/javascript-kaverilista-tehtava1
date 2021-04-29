@@ -1,30 +1,28 @@
-var lomake = document.forms['nimiInput']
-var kaverilista = document.querySelector('#lista')
-lomake.addEventListener('submit', autoRun)
-console.log('Anna ensimmäinen nimi')
-
-function autoRun(event) {
-    event.preventDefault()
-    var nimi = document.querySelector('#input').value
-    console.log(nimi)
-    lisaalistaan(nimi)
-
-}
 
 
-function lisaalistaan(nimi) {
+ var nimiLista = []
+ var kaverilista = document.getElementById('lista')
+ autoRun();
+ nimiLista.sort();
+ lisaaListaanv2();
 
-    if (kaverilista.childNodes.length < 11) {
-        var li = document.createElement("LI")
-        var text = document.createTextNode(nimi)
-        li.appendChild(text)
-        kaverilista.appendChild(li)
-        if (kaverilista.childNodes.length == 11) {
-            console.log('kiitos! päivitä sivu tyhjentääksesi lista')
-        } else if (kaverilista.childNodes.length < 11) {
-            console.log('Anna ' + kaverilista.childNodes.length + ' nimi')
-        }
-    } else {
-        alert('Lista täynnä! päivitä sivu')
-    }
-}
+ function autoRun() {
+     for (var i = 0; i < 10; i++) {
+         var nimi = prompt('Anna ' + [i + 1] + ' kaverisi nimi')
+         if (nimi.length > 0) {
+             nimiLista.push(nimi)
+         } else {
+             alert('Kenttä oli tyhjä!, anna nimi')
+             i = i - 1
+         }
+     }
+ }
+
+ function lisaaListaanv2() {
+     for (i = 0; i < nimiLista.length; i++) {
+         var li = document.createElement('LI')
+         var content = document.createTextNode(nimiLista[i])
+         li.appendChild(content)
+         kaverilista.appendChild(li)
+     }
+ }
